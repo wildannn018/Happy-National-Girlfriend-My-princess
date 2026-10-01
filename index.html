@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Happy My Girlfriend Sayang 🤍</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pink-50:#fff5f7;
+    --pink-100:#ffe6ec;
+    --pink-200:#ffd1dc;
+    --pink-300:#f9b4c6;
+    --pink-400:#f29bb3;
+    --rose:#d9738f;
+    --beige:#f6ece1;
+    --beige-deep:#ead9c6;
+    --white:#ffffff;
+    --text:#6b4b55;
+    --text-soft:#9a7a85;
+    --shadow:0 18px 50px rgba(217,115,143,.18);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Poppins',sans-serif;
+    color:var(--text);
+    background:linear-gradient(180deg,var(--pink-50) 0%,var(--beige) 45%,var(--pink-100) 100%);
+    background-attachment:fixed;
+    overflow-x:hidden;
+    line-height:1.7;
+  }
+
+  /* ---------- Background layers ---------- */
+  .bg-layer{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+  .bokeh{
+    position:absolute;border-radius:50%;
+    background:radial-gradient(circle,rgba(255,255,255,.85) 0%,rgba(249,180,198,.45) 45%,rgba(249,180,198,0) 72%);
+    filter:blur(6px);
+    opacity:0;
+    animation:bokehFloat var(--d,18s) ease-in-out infinite;
+    animation-delay:var(--delay,0s);
+  }
+  @keyframes bokehFloat{
+    0%{opacity:0;transform:translate3d(0,30px,0) scale(.9)}
+    25%{opacity:.7}
+    50%{opacity:.45;transform:translate3d(var(--x,20px),-40px,0) scale(1.1)}
+    75%{opacity:.7}
+    100%{opacity:0;transform:translate3d(0,-90px,0) scale(.9)}
+  }
+  .float-heart{
+    position:absolute;bottom:-40px;
+    color:var(--pink-300);
+    opacity:0;
+    animation:riseHeart linear forwards;
+    will-change:transform,opacity;
+  }
+  @keyframes riseHeart{
+    0%{opacity:0;transform:translate3d(0,0,0) rotate(0deg) scale(.7)}
+    12%{opacity:var(--o,.5)}
+    50%{transform:translate3d(var(--sway,20px),-55vh,0) rotate(var(--rot,12deg)) scale(1)}
+    100%{opacity:0;transform:translate3d(calc(var(--sway,20px)*-1),-115vh,0) rotate(calc(var(--rot,12deg)*-1)) scale(1.05)}
+  }
+  .fall-heart{
+    position:fixed;top:-30px;
+    pointer-events:none;z-index:5;
+    color:var(--pink-400);
+    opacity:0;
+    animation:fallHeart linear forwards;
+    will-change:transform,opacity;
+  }
+  @keyframes fallHeart{
+    0%{opacity:0;transform:translate3d(0,0,0) rotate(0deg)}
+    10%{opacity:.85}
+    100%{opacity:0;transform:translate3d(var(--drift,30px),105vh,0) rotate(var(--rot,180deg))}
+  }
+
+  main{position:relative;z-index:1}
+  section{padding:90px 22px;display:flex;flex-direction:column;align-items:center;text-align:center}
+
+  /* ---------- Reveal ---------- */
+  .reveal{opacity:0;transform:translateY(34px);transition:opacity 1.2s ease,transform 1.2s ease}
+  .reveal.show{opacity:1;transform:none}
+
+  /* ---------- Hero ---------- */
+  .hero{min-height:100vh;justify-content:center;position:relative}
+  .hero h1{
+    font-family:'Great Vibes',cursive;
+    font-weight:400;
+    font-size:clamp(3rem,11vw,6.6rem);
+    line-height:1.15;
+    color:var(--rose);
+    text-shadow:0 6px 30px rgba(249,180,198,.55);
+    opacity:0;
+    animation:fadeSlow 3.6s ease .4s forwards;
+  }
+  .hero .sub{
+    margin-top:18px;font-size:.95rem;letter-spacing:.35em;text-transform:uppercase;
+    color:var(--text-soft);font-weight:300;
+    opacity:0;animation:fadeSlow 3s ease 2.2s forwards;
+  }
+  @keyframes fadeSlow{from{opacity:0;transform:translateY(18px);filter:blur(6px)}to{opacity:1;transform:none;filter:blur(0)}}
+  .scroll-hint{
+    position:absolute;bottom:34px;left:50%;transform:translateX(-50%);
+    color:var(--text-soft);font-size:.75rem;letter-spacing:.3em;text-transform:uppercase;
+    text-decoration:none;opacity:0;animation:fadeSlow 2.5s ease 3.4s forwards;
+  }
+  .scroll-hint span{display:block;margin-top:6px;font-size:1.1rem;animation:bob 2s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(7px)}}
+
+  /* ---------- Photo ---------- */
+  .photo-wrap{position:relative;width:min(300px,72vw);aspect-ratio:1;margin:0 auto}
+  .photo-wrap::before,.photo-wrap::after{
+    content:"";position:absolute;border-radius:50%;
+  }
+  .photo-wrap::before{
+    inset:-14px;border:1.5px dashed var(--pink-300);
+    animation:spin 40s linear infinite;
+  }
+  .photo-wrap::after{
+    inset:-30px;border:1px solid rgba(249,180,198,.45);
+  }
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .photo{
+    width:100%;height:100%;border-radius:50%;overflow:hidden;
+    border:7px solid var(--white);
+    box-shadow:var(--shadow),0 0 0 3px var(--pink-200);
+    background:var(--pink-100);
+    cursor:pointer;position:relative;
+  }
+  .photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.2s ease}
+  .photo:hover img{transform:scale(1.06)}
+  .photo-note{margin-top:46px;font-size:.8rem;color:var(--text-soft);font-weight:300}
+  .photo-note b{font-weight:500;color:var(--rose)}
+  #photoInput{display:none}
+
+  /* ---------- Letter ---------- */
+  h2.title{
+    font-family:'Great Vibes',cursive;font-weight:400;
+    font-size:clamp(2.4rem,8vw,3.8rem);color:var(--rose);margin-bottom:8px;
+  }
+  .divider{color:var(--pink-300);letter-spacing:.6em;font-size:.8rem;margin-bottom:34px}
+  .letter{
+    width:min(680px,100%);
+    background:rgba(255,255,255,.72);
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    border:1px solid rgba(255,255,255,.9);
+    border-radius:26px;
+    padding:46px 34px 40px;
+    box-shadow:var(--shadow);
+    text-align:left;position:relative;
+  }
+  .letter::before{
+    content:"🤍";position:absolute;top:-18px;left:50%;transform:translateX(-50%);
+    font-size:1.6rem;background:var(--pink-50);border-radius:50%;width:42px;height:42px;
+    display:grid;place-items:center;box-shadow:0 6px 18px rgba(217,115,143,.2);
+  }
+  .letter .greet{font-family:'Great Vibes',cursive;font-size:2rem;color:var(--rose);margin-bottom:14px}
+  .letter p{font-size:.98rem;font-weight:300;margin-bottom:20px;min-height:1.7em;white-space:pre-wrap}
+  .letter .sign{font-family:'Great Vibes',cursive;font-size:1.9rem;color:var(--rose);text-align:right;margin-top:10px;min-height:2.4rem}
+  .cursor::after{content:"|";color:var(--pink-400);margin-left:1px;animation:blink 1s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
+  .skip{
+    margin-top:18px;background:none;border:none;font-family:inherit;font-size:.75rem;
+    color:var(--text-soft);cursor:pointer;letter-spacing:.15em;text-decoration:underline;text-underline-offset:4px;
+  }
+
+  /* ---------- Surprise button ---------- */
+  .btn{
+    font-family:'Poppins',sans-serif;font-size:1rem;font-weight:400;letter-spacing:.04em;
+    color:var(--white);
+    background:linear-gradient(135deg,var(--pink-400),var(--rose));
+    border:none;border-radius:60px;padding:16px 38px;cursor:pointer;
+    box-shadow:0 12px 30px rgba(217,115,143,.35);
+    transition:transform .5s ease,box-shadow .5s ease;
+    animation:pulse 3.4s ease-in-out infinite;
+  }
+  .btn:hover{transform:translateY(-4px) scale(1.04);box-shadow:0 18px 40px rgba(217,115,143,.45)}
+  @keyframes pulse{0%,100%{box-shadow:0 12px 30px rgba(217,115,143,.35)}50%{box-shadow:0 12px 44px rgba(242,155,179,.7)}}
+
+  /* ---------- Modal ---------- */
+  .modal{
+    position:fixed;inset:0;z-index:50;display:grid;place-items:center;padding:24px;
+    background:rgba(107,75,85,.28);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+    opacity:0;visibility:hidden;transition:opacity .6s ease,visibility .6s;
+  }
+  .modal.open{opacity:1;visibility:visible}
+  .note{
+    width:min(380px,100%);
+    background:linear-gradient(160deg,var(--white),var(--beige));
+    border-radius:22px;padding:42px 30px 34px;text-align:center;position:relative;
+    box-shadow:0 30px 80px rgba(217,115,143,.4);
+    transform:translateY(40px) scale(.85) rotate(-3deg);
+    transition:transform .8s cubic-bezier(.2,.9,.3,1.2);
+    border:1px solid var(--pink-100);
+  }
+  .modal.open .note{transform:none}
+  .note .env{font-size:2.6rem;animation:bob 2.4s ease-in-out infinite}
+  .note p{font-family:'Great Vibes',cursive;font-size:2.3rem;line-height:1.25;color:var(--rose);margin:10px 0 6px}
+  .note small{color:var(--text-soft);font-weight:300;font-size:.8rem}
+  .close{
+    position:absolute;top:12px;right:14px;width:34px;height:34px;border-radius:50%;
+    background:var(--pink-100);border:none;color:var(--rose);font-size:1.1rem;cursor:pointer;transition:transform .4s;
+  }
+  .close:hover{transform:rotate(90deg)}
+
+  /* ---------- Cards ---------- */
+  .cards{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:24px;width:min(980px,100%);margin-top:20px;
+  }
+  .card{
+    background:rgba(255,255,255,.75);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    border:1px solid rgba(255,255,255,.95);border-radius:26px;padding:38px 26px;
+    box-shadow:var(--shadow);transition:transform .7s ease,box-shadow .7s ease;
+  }
+  .card:hover{transform:translateY(-10px);box-shadow:0 26px 60px rgba(217,115,143,.28)}
+  .card .ico{
+    width:68px;height:68px;margin:0 auto 18px;border-radius:50%;display:grid;place-items:center;
+    font-size:1.9rem;background:linear-gradient(135deg,var(--pink-100),var(--beige));
+    box-shadow:inset 0 0 0 2px var(--pink-200);
+  }
+  .card h3{font-family:'Great Vibes',cursive;font-weight:400;font-size:2.1rem;color:var(--rose);margin-bottom:8px}
+  .card p{font-size:.9rem;font-weight:300;color:var(--text)}
+  .cards .card:nth-child(2){transition-delay:.15s}
+  .cards .card:nth-child(3){transition-delay:.3s}
+
+  /* ---------- Footer ---------- */
+  footer{
+    position:relative;z-index:1;text-align:center;padding:60px 20px 50px;
+    color:var(--text-soft);font-weight:300;font-size:.95rem;
+  }
+  footer .line{width:60px;height:1px;background:var(--pink-300);margin:0 auto 22px}
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:820px){
+    .cards{grid-template-columns:1fr;max-width:420px}
+    .cards .card:nth-child(n){transition-delay:0s}
+  }
+  @media (max-width:480px){
+    section{padding:70px 18px}
+    .letter{padding:40px 22px 32px}
+    .letter p{font-size:.93rem}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+    html{scroll-behavior:auto}
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-layer" id="bgLayer" aria-hidden="true"></div>
+
+<main>
+  <!-- 1. Hero -->
+  <section class="hero" id="hero">
+    <h1>Happy My Girlfriend Sayangg 🤍</h1>
+    <p class="sub">for you, always</p>
+    <a href="#photo" class="scroll-hint">scroll<span>↓</span></a>
+  </section>
+
+  <!-- 2. Photo -->
+  <section id="photo">
+    <div class="reveal">
+      <div class="photo-wrap">
+        <label class="photo" for="photoInput" title="Klik untuk mengganti foto">
+          <img id="photoImg" alt="Foto kita"
+               src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23ffe6ec'/%3E%3Cstop offset='1' stop-color='%23f6ece1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='400' height='400' fill='url(%23g)'/%3E%3Ctext x='200' y='210' font-size='90' text-anchor='middle'%3E%F0%9F%A4%8D%3C/text%3E%3Ctext x='200' y='270' font-family='sans-serif' font-size='20' fill='%23d9738f' text-anchor='middle'%3Etaruh fotomu di sini%3C/text%3E%3C/svg%3E">
+        </label>
+        <input type="file" id="photoInput" accept="image/*">
+      </div>
+      <p class="photo-note">Klik lingkaran untuk memilih fotomu, atau ganti <b>src</b> gambar di kode ✨</p>
+    </div>
+  </section>
+
+  <!-- 3. Letter -->
+  <section id="letter">
+    <div class="reveal">
+      <h2 class="title">A Letter for You</h2>
+      <div class="divider">✦ ✦ ✦</div>
+    </div>
+    <div class="letter reveal" id="letterBox">
+      <div class="greet">Dear my sayang,</div>
+      <p data-text="Di antara jutaan hari yang berlalu, ada satu hari yang diam-diam kusyukuri: hari ketika semesta mempertemukan kita. Kamu datang seperti pagi yang lembut, tanpa suara, tapi tiba-tiba semuanya terasa lebih hangat. Thank you for being the softest part of my world."></p>
+      <p data-text="Bersamamu, hal-hal sederhana jadi puisi. Secangkir teh sore, obrolan receh tengah malam, atau sekadar diam berdua, semuanya terasa seperti rumah. Aku belajar bahwa bahagia itu bukan tentang hal besar, tapi tentang kamu yang selalu ada di sampingku, in every little moment."></p>
+      <p data-text="Maaf kalau aku belum sempurna. Kadang aku keras kepala, kadang lupa berkata manis. Tapi percayalah, di setiap doa kecilku, namamu selalu jadi yang pertama kusebut. Aku ingin tumbuh bersamamu, jatuh dan bangun bersamamu, dan tetap memilihmu setiap hari, again and again."></p>
+      <p data-text="Hari ini aku cuma ingin bilang: kamu berharga, kamu dicintai, dan kamu lebih dari cukup. Semoga semua hal baik memeluk langkahmu. Dan jika suatu hari dunia terasa berat, ingatlah ada seseorang yang akan selalu pulang padamu. You are my favorite hello and my hardest goodbye."></p>
+      <div class="sign" data-text="Forever yours, 🤍"></div>
+    </div>
+    <button class="skip" id="skipBtn" type="button">tampilkan semua surat</button>
+  </section>
+
+  <!-- 4. Surprise -->
+  <section id="surprise">
+    <div class="reveal">
+      <button class="btn" id="surpriseBtn" type="button">A little surprise for you ✨</button>
+    </div>
+  </section>
+
+  <!-- 5. Why I love you -->
+  <section id="why">
+    <div class="reveal">
+      <h2 class="title">Why I Love You</h2>
+      <div class="divider">✦ ✦ ✦</div>
+    </div>
+    <div class="cards">
+      <article class="card reveal">
+        <div class="ico">🌸</div>
+        <h3>Your Smile</h3>
+        <p>Senyummu itu seperti matahari pagi yang malu-malu. Satu lengkungan kecil, dan semua lelahku hilang begitu saja.</p>
+      </article>
+      <article class="card reveal">
+        <div class="ico">🎀</div>
+        <h3>Your Laugh</h3>
+        <p>Tawamu adalah lagu favoritku. Suaranya ringan, tulus, dan selalu berhasil membuat hariku terasa lebih cerah.</p>
+      </article>
+      <article class="card reveal">
+        <div class="ico">🤍</div>
+        <h3>Your Heart</h3>
+        <p>Hatimu lembut dan penuh kasih. Cara kamu peduli pada orang lain membuatku jatuh cinta berkali-kali.</p>
+      </article>
+    </div>
+  </section>
+</main>
+
+<!-- 6. Footer -->
+<footer>
+  <div class="line"></div>
+  Made with love, for my favorite person 🌙
+</footer>
+
+<!-- Pop-up -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="Surat kecil">
+  <div class="note">
+    <button class="close" id="closeBtn" aria-label="Tutup" type="button">✕</button>
+    <div class="env">💌</div>
+    <p>I love you more every day</p>
+    <small>— selalu, tanpa henti 🤍</small>
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var bg = document.getElementById('bgLayer');
+  var HEARTS = ['♥','♡','❤','🤍'];
+
+  /* ---------- Bokeh ---------- */
+  for(var i=0;i<14;i++){
+    var b = document.createElement('div');
+    b.className = 'bokeh';
+    var size = 50 + Math.random()*130;
+    b.style.width = b.style.height = size+'px';
+    b.style.left = Math.random()*100+'%';
+    b.style.top = Math.random()*100+'%';
+    b.style.setProperty('--d', (14+Math.random()*14)+'s');
+    b.style.setProperty('--delay', (-Math.random()*20)+'s');
+    b.style.setProperty('--x', (Math.random()*80-40)+'px');
+    bg.appendChild(b);
+  }
+
+  /* ---------- Floating hearts (background) ---------- */
+  function spawnFloat(){
+    var h = document.createElement('span');
+    h.className = 'float-heart';
+    h.textContent = HEARTS[Math.floor(Math.random()*HEARTS.length)];
+    h.style.left = Math.random()*100+'%';
+    h.style.fontSize = (12+Math.random()*22)+'px';
+    var dur = 11+Math.random()*10;
+    h.style.animationDuration = dur+'s';
+    h.style.setProperty('--sway', (Math.random()*60+10)+'px');
+    h.style.setProperty('--rot', (Math.random()*30+5)+'deg');
+    h.style.setProperty('--o', (0.25+Math.random()*0.35));
+    bg.appendChild(h);
+    setTimeout(function(){h.remove()}, dur*1000+200);
+  }
+  if(!reduce){
+    for(var k=0;k<8;k++) setTimeout(spawnFloat, k*500);
+    setInterval(spawnFloat, 1400);
+  }
+
+  /* ---------- Falling hearts on scroll ---------- */
+  var lastY = window.scrollY, lastSpawn = 0;
+  function spawnFall(){
+    var h = document.createElement('span');
+    h.className = 'fall-heart';
+    h.textContent = HEARTS[Math.floor(Math.random()*HEARTS.length)];
+    h.style.left = Math.random()*100+'vw';
+    h.style.fontSize = (12+Math.random()*16)+'px';
+    var dur = 3.5+Math.random()*3;
+    h.style.animationDuration = dur+'s';
+    h.style.setProperty('--drift', (Math.random()*100-50)+'px');
+    h.style.setProperty('--rot', (Math.random()*360-180)+'deg');
+    document.body.appendChild(h);
+    setTimeout(function(){h.remove()}, dur*1000+200);
+  }
+  window.addEventListener('scroll', function(){
+    if(reduce) return;
+    var now = Date.now(), y = window.scrollY;
+    if(Math.abs(y-lastY) > 14 && now-lastSpawn > 160){
+      spawnFall();
+      if(Math.random()>.55) spawnFall();
+      lastSpawn = now;
+    }
+    lastY = y;
+  }, {passive:true});
+
+  /* ---------- Reveal on scroll ---------- */
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); }
+    });
+  }, {threshold:.18});
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+
+  /* ---------- Typewriter letter ---------- */
+  var targets = Array.prototype.slice.call(document.querySelectorAll('#letterBox [data-text]'));
+  var started = false, skipped = false;
+  function sleep(ms){ return new Promise(function(r){ setTimeout(r, ms); }); }
+
+  async function typeEl(el){
+    var text = el.getAttribute('data-text');
+    el.classList.add('cursor');
+    for(var i=0;i<text.length;i++){
+      if(skipped) break;
+      el.textContent = text.slice(0,i+1);
+      var c = text[i];
+      await sleep(c==='.'||c==='!'||c==='?' ? 260 : c===',' ? 130 : 24);
+    }
+    el.textContent = text;
+    el.classList.remove('cursor');
+  }
+  async function runLetter(){
+    if(started) return; started = true;
+    for(var i=0;i<targets.length;i++){
+      if(skipped) break;
+      await typeEl(targets[i]);
+      await sleep(350);
+    }
+    finishLetter();
+  }
+  function finishLetter(){
+    targets.forEach(function(el){
+      el.textContent = el.getAttribute('data-text');
+      el.classList.remove('cursor');
+    });
+    var s = document.getElementById('skipBtn'); if(s) s.style.display='none';
+  }
+  var letterIO = new IntersectionObserver(function(entries){
+    if(entries[0].isIntersecting){ letterIO.disconnect(); if(reduce){ finishLetter(); } else { runLetter(); } }
+  }, {threshold:.35});
+  letterIO.observe(document.getElementById('letterBox'));
+  document.getElementById('skipBtn').addEventListener('click', function(){
+    skipped = true; started = true; finishLetter();
+  });
+
+  /* ---------- Surprise popup ---------- */
+  var modal = document.getElementById('modal');
+  function openModal(){
+    modal.classList.add('open');
+    if(!reduce) for(var i=0;i<14;i++) setTimeout(spawnFall, i*90);
+  }
+  function closeModal(){ modal.classList.remove('open'); }
+  document.getElementById('surpriseBtn').addEventListener('click', openModal);
+  document.getElementById('closeBtn').addEventListener('click', closeModal);
+  modal.addEventListener('click', function(e){ if(e.target===modal) closeModal(); });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeModal(); });
+
+  /* ---------- Photo picker (preview only, stays on this device) ---------- */
+  document.getElementById('photoInput').addEventListener('change', function(e){
+    var f = e.target.files && e.target.files[0];
+    if(!f) return;
+    var r = new FileReader();
+    r.onload = function(ev){ document.getElementById('photoImg').src = ev.target.result; };
+    r.readAsDataURL(f);
+  });
+})();
+</script>
+</body>
+</html>
